@@ -42,11 +42,11 @@ aws-secure-vpc-web-server/
 1. Navigate to the AWS Management Console -> VPC Dashboard.
 2. Click Create VPC and select VPC and more.
 3. Configure your settings:
-* Name tag auto-generation:```text  my-secure-vpc```
+* Name tag auto-generation:```text my-secure-vpc```
 * IPv4 CIDR block: 10.1.0.0/16
-* Number of Availability Zones (AZs): ```text  2```
-* Number of public subnets: ```text  2```
-* Number of private subnets:```text  2```
+* Number of Availability Zones (AZs): ```text 2```
+* Number of public subnets: ```text 2```
+* Number of private subnets: ```text 2```
 * NAT gateways:```text```  None (Ensures zero unexpected charges / Free Tier compliant)
 * DNS options: Enable both DNS hostnames and DNS resolution.
 4. Click Create VPC.
@@ -54,28 +54,28 @@ aws-secure-vpc-web-server/
 ### Step 2: Configure Security Groups
 1. Go to Security Groups in the VPC Dashboard, then click Create security group.
 2. Configure the details:
-* Security group name:```text  web-server-sg```
-* Description:```text  Allow HTTP and restricted SSH access```
-* VPC: Select```text  my-secure-vpc```.
+* Security group name:```text web-server-sg```
+* Description:```text Allow HTTP and restricted SSH access```
+* VPC: Select```text my-secure-vpc```.
 3. Configure Inbound Rules:
-* Type:```text  SSH``` (Port 22) | Source:```text  My IP``` (Restricts management access to authorized networks only).
+* Type:```text SSH``` (Port 22) | Source:```text My IP``` (Restricts management access to authorized networks only).
 * Type: HTTP (Port 80) | Source: Anywhere-IPv4 (0.0.0.0/0) (Allows public web viewing).
 4. Configure Outbound Rules:
-* Type:```text  All traffic``` | Destination:```text  0.0.0.0/0``` (Allows server outbound connectivity for package updates).
+* Type:```text All traffic``` | Destination:```text 0.0.0.0/0``` (Allows server outbound connectivity for package updates).
 5. Click Create security group.
 
 ### Step 3: Launch an EC2 Ubuntu Instance in the Custom VPC
 1. Open the EC2 Dashboard and click Launch instance.
 2. Configure the instance specifications:
-* Name:```text  secure-ubuntu-webserver```
+* Name:```text secure-ubuntu-webserver```
 * AMI: Select Ubuntu Server 26.04 LTS (Free tier eligible).
-* Instance Type:```text  t3.micro``` (Free tier eligible).
-* Key Pair: Select or create an SSH key pair (e.g.,```text  my-aws-key```).
+* Instance Type:```text t3.micro``` (Free tier eligible).
+* Key Pair: Select or create an SSH key pair (e.g.,```text my-aws-key```).
 3. Network Settings (Click Edit):
-* VPC: Select```text  my-secure-vpc```.
-* Subnet: Choose one of the public subnets (e.g.,```text  my-secure-subnet-public1```).
+* VPC: Select```text my-secure-vpc```.
+* Subnet: Choose one of the public subnets (e.g.,```text my-secure-subnet-public1```).
 * Auto-assign public IP: Set to Enable.
-* Firewall (Security Groups): Choose Select existing security group and pick```text  web-server-sg```.
+* Firewall (Security Groups): Choose Select existing security group and pick```text web-server-sg```.
 * Click Launch instance.
 
 ### Step 4: Install and Configure Nginx Web Server
